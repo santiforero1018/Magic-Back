@@ -1,4 +1,4 @@
-package edu.eci.arsw.magicBrushstrokesApp;
+package edu.eci.arsw.magicBrushstrokesApp.StompCommunication;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;

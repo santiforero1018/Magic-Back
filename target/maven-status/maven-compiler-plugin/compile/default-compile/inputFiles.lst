@@ -1,6 +1,6 @@
-D:\Notas 4.0\Trabajos Universidad\8. Octavo Semestre\ARSW\Proyecto\Magic-Brushstrokes\src\main\java\edu\eci\arsw\magicBrushstrokesApp\model\Game.java
-D:\Notas 4.0\Trabajos Universidad\8. Octavo Semestre\ARSW\Proyecto\Magic-Brushstrokes\src\main\java\edu\eci\arsw\magicBrushstrokesApp\MagicBrushstrokesWebSocketConfig.java
-D:\Notas 4.0\Trabajos Universidad\8. Octavo Semestre\ARSW\Proyecto\Magic-Brushstrokes\src\main\java\edu\eci\arsw\magicBrushstrokesApp\model\Player.java
-D:\Notas 4.0\Trabajos Universidad\8. Octavo Semestre\ARSW\Proyecto\Magic-Brushstrokes\src\main\java\edu\eci\arsw\magicBrushstrokesApp\MagicBrushstrokesApplication.java
-D:\Notas 4.0\Trabajos Universidad\8. Octavo Semestre\ARSW\Proyecto\Magic-Brushstrokes\src\main\java\edu\eci\arsw\magicBrushstrokesApp\STOMPMessagesHandler.java
-D:\Notas 4.0\Trabajos Universidad\8. Octavo Semestre\ARSW\Proyecto\Magic-Brushstrokes\src\main\java\edu\eci\arsw\magicBrushstrokesApp\model\Point.java
+C:\Users\santiago.forero-y\Downloads\Magic-Brushstrokes\src\main\java\edu\eci\arsw\magicBrushstrokesApp\MagicBrushstrokesApplication.java
+C:\Users\santiago.forero-y\Downloads\Magic-Brushstrokes\src\main\java\edu\eci\arsw\magicBrushstrokesApp\StompCommunication\STOMPMessagesHandler.java
+C:\Users\santiago.forero-y\Downloads\Magic-Brushstrokes\src\main\java\edu\eci\arsw\magicBrushstrokesApp\model\Point.java
+C:\Users\santiago.forero-y\Downloads\Magic-Brushstrokes\src\main\java\edu\eci\arsw\magicBrushstrokesApp\StompCommunication\MagicBrushstrokesWebSocketConfig.java
+C:\Users\santiago.forero-y\Downloads\Magic-Brushstrokes\src\main\java\edu\eci\arsw\magicBrushstrokesApp\model\Player.java
+C:\Users\santiago.forero-y\Downloads\Magic-Brushstrokes\src\main\java\edu\eci\arsw\magicBrushstrokesApp\model\Game.java
