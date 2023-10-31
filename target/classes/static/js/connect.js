@@ -3,6 +3,7 @@ var connect = (function () {
     var lastPt = null;
     var canvas;
     var ctx;
+    let code;
 
     class Point {
         constructor(x, y) {
@@ -12,6 +13,13 @@ var connect = (function () {
     }
 
     var stompClient = null;
+
+    var randomKey = function(){
+        var random = Math.random();
+        code = Math.ceil(random * 900000).toString().padStart(6,'0');
+        window.location.href = 'board.html?code=' + code;
+    }
+
 
     var draw = function (event){
         if(lastPt!=null) {
@@ -35,35 +43,52 @@ var connect = (function () {
         lastPt = null;
     }
 
-    var connectAndSubscribe = function (topic) {
+    var connectAndSubscribe = function () {
         console.info('Connecting to WS...');
         var socket = new SockJS("/stompendpoint");
         stompClient = Stomp.over(socket);
         
+        //var room = $('#room').val();
+
+        // console.log(model.getCode());
+
+        // randomKey();
+
         stompClient.connect({}, function (frame) {
             console.log('Connected: ' + frame);
-            stompClient.subscribe('/game' + topic, function (eventbody) {
-                var pt = JSON.parse(eventbody.body);               
+            stompClient.subscribe("/game/room."+code, function (eventbody) {
+                var pt = JSON.parse(eventbody.body);        
             });
         });
 
     };
 
+    var connectToRoom = function (){
+        code = $('#joinMe').val();
+        window.location.href = 'board.html?code=' + code;
+    }
+
 
     return {
 
         init: function () {
+            var urlParams = new URLSearchParams(window.location.search);
+            code = urlParams.get('code');
             canvas = document.getElementById("canvas1");
             ctx = canvas.getContext("2d");
             if (window.PointerEvent) {
                 canvas.addEventListener("pointerdown", function () {
                     canvas.addEventListener("pointermove", draw, false);
-                    stompClient.send("/app/newpoint", {}, JSON.stringify(pt))
+                    stompClient.send("/app/room", {}, JSON.stringify(pt))
                 }, false);
                 canvas.addEventListener("pointerup", endPointer, false);
             }
             connectAndSubscribe();
-        }
+        },
+
+        connectAndSubscribe,
+        randomKey,
+        connectToRoom,
     }
 
 })();
