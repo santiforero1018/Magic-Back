@@ -1,0 +1,6 @@
+edu\eci\arsw\magicBrushstrokesApp\model\Point.class
+edu\eci\arsw\magicBrushstrokesApp\model\Game.class
+edu\eci\arsw\magicBrushstrokesApp\MagicBrushstrokesApplication.class
+edu\eci\arsw\magicBrushstrokesApp\STOMPMessagesHandler.class
+edu\eci\arsw\magicBrushstrokesApp\MagicBrushstrokesWebSocketConfig.class
+edu\eci\arsw\magicBrushstrokesApp\model\Player.class
