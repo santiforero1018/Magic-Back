@@ -4,6 +4,8 @@ var connect = (function () {
     var canvas;
     var ctx;
     let code;
+    let drawingPoint = [];
+    
 
     class Point {
         constructor(x, y) {
@@ -33,6 +35,8 @@ var connect = (function () {
           }
           //Store latest pointer
           lastPt = {x:event.pageX, y:event.pageY};
+          drawingPoint.push(new Point(event.pageX, event.pageY));
+
     }
 
     var endPointer = function(event){
@@ -57,7 +61,8 @@ var connect = (function () {
         stompClient.connect({}, function (frame) {
             console.log('Connected: ' + frame);
             stompClient.subscribe("/game/room."+code, function (eventbody) {
-                var pt = JSON.parse(eventbody.body);        
+                var pts = JSON.parse(eventbody.body);
+                handleDrawEvent(pts);        
             });
         });
 
@@ -66,6 +71,15 @@ var connect = (function () {
     var connectToRoom = function (){
         code = $('#joinMe').val();
         window.location.href = 'board.html?code=' + code;
+    }
+
+    var handleDrawEvent = function (points) {
+        ctx.beginPath();
+        ctx.moveTo(points[0].x, points[0].y);
+        for (var i = 1; i < points.length; i++) {
+            ctx.lineTo(points[i].x, points[i].y);
+        }
+        ctx.stroke();
     }
 
 
@@ -79,7 +93,9 @@ var connect = (function () {
             if (window.PointerEvent) {
                 canvas.addEventListener("pointerdown", function () {
                     canvas.addEventListener("pointermove", draw, false);
-                    stompClient.send("/app/room", {}, JSON.stringify(pt))
+                    stompClient.send("/app/room."+code, {}, JSON.stringify(drawingPoint));
+                    drawingPoint = [];
+                    // endPointer();
                 }, false);
                 canvas.addEventListener("pointerup", endPointer, false);
             }
