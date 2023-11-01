@@ -15,7 +15,7 @@ public class STOMPMessagesHandler {
     SimpMessagingTemplate msgt;
 
     @MessageMapping("/room.{roomCode}")
-    public void handleDrawEvent(Point[] pts,@DestinationVariable String roomCode) throws Exception{
+    public void handleDrawEvent(Point[] pts, @DestinationVariable String roomCode) throws Exception{
         System.out.println("Nuevo jugador en la sala: ");
         msgt.convertAndSend("/game/room." + roomCode, pts); 
     }
