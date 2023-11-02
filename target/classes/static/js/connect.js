@@ -21,8 +21,13 @@ var connect = (function () {
     var stompClient = null;
 
     var randomKey = function () {
-        var random = Math.random();
-        code = Math.ceil(random * 900000).toString().padStart(6, '0');
+        var room = document.getElementById("room");
+        if (room.value === "") {
+            var random = Math.random();
+            code = Math.ceil(random * 900000).toString().padStart(6, '0');
+        }else{
+            code = room.value;
+        }
         window.location.href = 'board.html?code=' + code;
     }
 
