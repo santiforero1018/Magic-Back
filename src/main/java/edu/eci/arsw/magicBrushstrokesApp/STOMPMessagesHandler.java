@@ -6,7 +6,7 @@ import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 
-import edu.eci.arsw.magicBrushstrokesApp.model.Point;
+import edu.eci.arsw.magicBrushstrokesApp.model.CanvasData;
 
 @Controller
 public class STOMPMessagesHandler {
@@ -15,8 +15,7 @@ public class STOMPMessagesHandler {
     SimpMessagingTemplate msgt;
 
     @MessageMapping("/room.{roomCode}")
-    public void handleDrawEvent(Point[] pts, @DestinationVariable String roomCode) throws Exception{
-        System.out.println("Nuevo jugador en la sala: ");
-        msgt.convertAndSend("/game/room." + roomCode, pts); 
+    public void handleDrawEvent(CanvasData canvasData,@DestinationVariable String roomCode) throws Exception{
+        msgt.convertAndSend("/game/room." + roomCode, canvasData);
     }
 }

@@ -5,6 +5,7 @@ var connect = (function () {
     var ctx;
     let code;
     let drawingPoint = [];
+    var assignedCanvasId;
 
 
     class Point {
@@ -61,8 +62,8 @@ var connect = (function () {
         stompClient.connect({}, function (frame) {
             console.log('Connected: ' + frame);
             stompClient.subscribe("/game/room." + code, function (eventbody) {
-                var pts = JSON.parse(eventbody.body);
-                handleDrawEvent(pts);
+                var canvasData = JSON.parse(eventbody.body);
+                handleDrawEvent(canvasData);
 
             });
         });
@@ -74,34 +75,58 @@ var connect = (function () {
         window.location.href = 'board.html?code=' + code;
     }
 
-    var handleDrawEvent = function (points) {
-        if (points) {
+    var handleDrawEvent = function (canvasData) {
+        if (Array.isArray(canvasData.drawingData) && canvasData.drawingData.length > 0) {
+            var canvasDraw = document.getElementById(canvasData.canvasId);
+            ctx = canvasDraw.getContext("2d");
             ctx.beginPath();
-            ctx.moveTo(points[0].x, points[0].y);
-            for (var i = 1; i < points.length; i++) {
-                ctx.lineTo(points[i].x, points[i].y);
+            for (var i = 0; i < canvasData.drawingData.length; i++) {
+                ctx.lineTo(canvasData.drawingData[i].x, canvasData.drawingData[i].y);
             }
             ctx.stroke();
         }
 
     }
 
+    var sendCanvasData = function () {
+        var canvasData = {
+            canvasId: assignedCanvasId,
+            drawingData: drawingPoint
+        };
+        stompClient.send("/app/room." + code, {}, JSON.stringify(canvasData));
+        drawingPoint = [];
+    }
 
     return {
 
         init: function () {
             var urlParams = new URLSearchParams(window.location.search);
             code = urlParams.get('code');
-            canvas = document.getElementById("canvas1");
+            // Obtén el ID de canvas asignado al usuario desde la cookie o el almacenamiento local
+            assignedCanvasId = localStorage.getItem('assignedCanvasId');
+            if (!assignedCanvasId) {
+                // Si el usuario no tiene un ID de canvas asignado, asigna uno aleatoriamente
+                const canvasIds = ["canvas1", "canvas2", "canvas3", "canvas4"];
+                assignedCanvasId = canvasIds[Math.floor(Math.random() * canvasIds.length)];
+
+                // Guarda el ID asignado en la cookie o el almacenamiento local
+                localStorage.setItem('assignedCanvasId', assignedCanvasId);
+                console.log("Canvas: " + assignedCanvasId);
+            }
+            canvas = document.getElementById(assignedCanvasId);
+            console.log("Canvas: " + assignedCanvasId);
             ctx = canvas.getContext("2d");
             // if (window.PointerEvent) {
             canvas.addEventListener("pointerdown", function () {
-                canvas.addEventListener("pointermove", draw,false);
+                canvas.addEventListener("pointermove", draw, false);
                 stompClient.send("/app/room." + code, {}, JSON.stringify(drawingPoint));
                 drawingPoint = [];
                 // endPointer();
-            },false);
-            canvas.addEventListener("pointerup", endPointer, false);
+            }, false);
+            canvas.addEventListener("pointerup", function () {
+                endPointer();
+                sendCanvasData();
+            });
             // }
             connectAndSubscribe();
         },
