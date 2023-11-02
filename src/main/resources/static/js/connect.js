@@ -97,38 +97,86 @@ var connect = (function () {
         drawingPoint = [];
     }
 
+    var requestCanvasAssignment = function (roomCode) {
+        return new Promise((resolve, reject) => {
+            // Realiza una solicitud al servidor para obtener la asignación del canvas y el roomCode
+            fetch('/api/assignCanvas', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ roomCode: roomCode }),
+            })
+                .then(response => response.json())
+                .then(data => {
+                    // data.canvasId contiene el ID del canvas asignado por el servidor
+                    assignedCanvasId = data.canvasId;
+                    console.log("Canvas asignado: " + assignedCanvasId);
+
+                    // data.roomCode contiene el roomCode asignado por el servidor
+                    roomCode = data.roomCode;
+                    console.log("roomCode asignado: " + roomCode);
+
+                    // Resuelve la Promesa con los datos necesarios
+                    resolve();
+                })
+                .catch(error => {
+                    reject(error);
+                });
+        });
+    };
+
     return {
 
         init: function () {
             var urlParams = new URLSearchParams(window.location.search);
-            code = urlParams.get('code');
+            code = "Test";
+            console.log("Room code: " + code);
             // Obtén el ID de canvas asignado al usuario desde la cookie o el almacenamiento local
             assignedCanvasId = localStorage.getItem('assignedCanvasId');
             if (!assignedCanvasId) {
-                // Si el usuario no tiene un ID de canvas asignado, asigna uno aleatoriamente
-                const canvasIds = ["canvas1", "canvas2", "canvas3", "canvas4"];
-                assignedCanvasId = canvasIds[Math.floor(Math.random() * canvasIds.length)];
+                requestCanvasAssignment(code)
+                    .then(() => {
+                        if (assignedCanvasId === "FULLROOM") {
+                            console.log("The room is full, no canvas Assigned");
+                            alert("The room is full, no canvas Assigned");
+                        } else {
+                            canvas = document.getElementById(assignedCanvasId);
+                            console.log("Canvas: " + assignedCanvasId);
+                            ctx = canvas.getContext("2d");
+                            // if (window.PointerEvent) {
+                            canvas.addEventListener("pointerdown", function () {
+                                canvas.addEventListener("pointermove", draw, false);
 
-                // Guarda el ID asignado en la cookie o el almacenamiento local
-                localStorage.setItem('assignedCanvasId', assignedCanvasId);
+                                drawingPoint = [];
+                                // endPointer();
+                            }, false);
+                            canvas.addEventListener("pointerup", function () {
+                                endPointer();
+                                sendCanvasData();
+                            });
+                            // }
+                            connectAndSubscribe();
+                        }
+                    });
+            } else {
+                canvas = document.getElementById(assignedCanvasId);
                 console.log("Canvas: " + assignedCanvasId);
+                ctx = canvas.getContext("2d");
+                // if (window.PointerEvent) {
+                canvas.addEventListener("pointerdown", function () {
+                    canvas.addEventListener("pointermove", draw, false);
+
+                    drawingPoint = [];
+                    // endPointer();
+                }, false);
+                canvas.addEventListener("pointerup", function () {
+                    endPointer();
+                    sendCanvasData();
+                });
+                // }
+                connectAndSubscribe();
             }
-            canvas = document.getElementById(assignedCanvasId);
-            console.log("Canvas: " + assignedCanvasId);
-            ctx = canvas.getContext("2d");
-            // if (window.PointerEvent) {
-            canvas.addEventListener("pointerdown", function () {
-                canvas.addEventListener("pointermove", draw, false);
-                
-                drawingPoint = [];
-                // endPointer();
-            }, false);
-            canvas.addEventListener("pointerup", function () {
-                endPointer();
-                sendCanvasData();
-            });
-            // }
-            connectAndSubscribe();
         },
 
         connectAndSubscribe,
