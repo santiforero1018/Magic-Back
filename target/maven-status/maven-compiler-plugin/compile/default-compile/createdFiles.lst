@@ -1,6 +1,0 @@
-edu\eci\arsw\magicBrushstrokes\services\UserService.class
-edu\eci\arsw\magicBrushstrokes\controller\SignUpController.class
-edu\eci\arsw\magicBrushstrokes\model\Player.class
-edu\eci\arsw\magicBrushstrokes\repository\PlayerRepository.class
-edu\eci\arsw\magicBrushstrokesApp\MagicBrushstrokesApplication.class
-edu\eci\arsw\magicBrushstrokes\services\PlayerService.class

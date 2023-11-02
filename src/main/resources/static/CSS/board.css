@@ -1,0 +1,54 @@
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Jost' , sans-serif;
+    background: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
+}
+
+.screen{
+    display: flex;
+    background: url("../IMG/fondo.jpg") no-repeat center / cover;
+    grid-template-columns: auto auto;
+    align-items: center;
+    justify-content: center;
+    width: 1000%;
+    height: 500%;
+    
+    
+}
+
+.boards{
+    position: relative;
+    align-items: center;
+    margin-right: 5%;
+}
+
+.canvas{
+    width: 400px;
+    height: 400px;
+    border: 2px solid rgb(216, 61, 236);
+    background-color: white;
+    /* margin-left: 2%; */
+}
+
+.menu{
+    position: relative;
+    text-align: center;
+    /* background: url("../IMG/fondo.jpg") no-repeat center / cover; */
+    width: 950px;
+    height: 950px;
+    
+}
+
+.distribution{
+    display:flex;
+    flex-direction: row;
+    margin-bottom: 3%;
+}
+
+.distribution > .canvas{
+    margin-left: 2%;
+}
