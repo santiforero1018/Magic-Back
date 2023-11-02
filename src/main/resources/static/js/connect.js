@@ -6,6 +6,9 @@ var connect = (function () {
     let code;
     let drawingPoint = [];
     var assignedCanvasId;
+    var wrongCanvas1;
+    var wrongCanvas2;
+    var wrongCanvas3;
 
 
     class Point {
@@ -100,18 +103,37 @@ var connect = (function () {
                 type: 'POST',
                 contentType: "application/json",
                 data: JSON.stringify({ roomCode: roomCode }),
-                success: function(data){
+                success: function (data) {
                     assignedCanvasId = data.canvasId;
                     roomCode = data.roomCode;
                     resolve();
                 },
-                error: function(error){
+                error: function (error) {
                     reject(error);
                 }
 
             });
 
         });
+    };
+
+    var prepareUnassignedCanvas = function () {
+        var allCanvas = ["canvas1", "canvas2", "canvas3", "canvas4"];
+        var index = allCanvas.indexOf(assignedCanvasId);
+        allCanvas.splice(index, 1);
+        wrongCanvas1 = document.getElementById(allCanvas[0]);
+        wrongCanvas2 = document.getElementById(allCanvas[1]);
+        wrongCanvas3 = document.getElementById(allCanvas[2]);
+        wrongCanvas1.addEventListener("click", handleCanvasClick);
+        wrongCanvas2.addEventListener("click", handleCanvasClick);
+        wrongCanvas3.addEventListener("click", handleCanvasClick);
+    };
+
+    var handleCanvasClick = function (event) {
+        const clickedCanvas = event.target;
+        if (clickedCanvas !== wrongCanvas1 || clickedCanvas !== wrongCanvas2 || clickedCanvas !== wrongCanvas3) {
+            alert("Canvas equivocado, se te asigno: " + assignedCanvasId);
+        }
     };
 
     return {
@@ -130,6 +152,7 @@ var connect = (function () {
                             alert("The room is full, no canvas Assigned");
                         } else {
                             canvas = document.getElementById(assignedCanvasId);
+                            prepareUnassignedCanvas();
                             console.log("Canvas: " + assignedCanvasId);
                             ctx = canvas.getContext("2d");
                             canvas.addEventListener("pointerdown", function () {
