@@ -1,4 +1,4 @@
-package edu.eci.arsw.magicBrushstrokesApp;
+package edu.eci.arsw.magicBrushstrokes.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,7 +9,7 @@ import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 
-import edu.eci.arsw.magicBrushstrokesApp.model.CanvasData;
+import edu.eci.arsw.magicBrushstrokes.model.CanvasData;
 
 @Controller
 public class STOMPMessagesHandler {

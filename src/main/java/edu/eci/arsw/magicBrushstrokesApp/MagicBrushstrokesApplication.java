@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan(basePackages = {"edu.eci.arsw.magicBrushstrokesApp"})
+@ComponentScan(basePackages = {"edu.eci.arsw.magicBrushstrokes"})
 public class MagicBrushstrokesApplication {
 
 	public static void main(String[] args) {

@@ -1,4 +1,4 @@
-package edu.eci.arsw.magicBrushstrokesApp.model;
+package edu.eci.arsw.magicBrushstrokes.model;
 
 public class Point {
     float x,y;

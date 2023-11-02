@@ -1,4 +1,4 @@
-package edu.eci.arsw.magicBrushstrokesApp.Controllers;
+package edu.eci.arsw.magicBrushstrokes.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
