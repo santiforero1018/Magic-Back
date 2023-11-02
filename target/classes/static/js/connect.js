@@ -78,12 +78,12 @@ var connect = (function () {
     var handleDrawEvent = function (canvasData) {
         if (Array.isArray(canvasData.drawingData) && canvasData.drawingData.length > 0) {
             var canvasDraw = document.getElementById(canvasData.canvasId);
-            ctx = canvasDraw.getContext("2d");
-            ctx.beginPath();
+            var ctxN = canvasDraw.getContext("2d");
+            ctxN.beginPath();
             for (var i = 0; i < canvasData.drawingData.length; i++) {
-                ctx.lineTo(canvasData.drawingData[i].x, canvasData.drawingData[i].y);
+                ctxN.lineTo(canvasData.drawingData[i].x, canvasData.drawingData[i].y);
             }
-            ctx.stroke();
+            ctxN.stroke();
         }
 
     }
@@ -119,7 +119,7 @@ var connect = (function () {
             // if (window.PointerEvent) {
             canvas.addEventListener("pointerdown", function () {
                 canvas.addEventListener("pointermove", draw, false);
-                stompClient.send("/app/room." + code, {}, JSON.stringify(drawingPoint));
+                
                 drawingPoint = [];
                 // endPointer();
             }, false);
