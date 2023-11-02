@@ -1,30 +1,31 @@
-package edu.eci.arsw.magicBrushstrokesApp;
+package edu.eci.arsw.magicBrushstrokesApp.Controllers;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping(value="/API-v1.0MagicBrushStrokes")
 public class CanvasAssignmentController {
 
-    HashMap<String, ArrayList<String>> rooms = new HashMap<>();
+    Map<String, ArrayList<String>> rooms = new HashMap<>();
 
-    @PostMapping("/assignCanvas")
-    public ResponseEntity<Map<String, String>> assignCanvas(@RequestBody Map<String, String> requestBody) {
+    @RequestMapping(method = RequestMethod.POST, value= "/board")
+    public ResponseEntity<?> assignCanvas(@RequestBody Map<String, String> requestBody) {
         // Lógica para asignar un canvas específico al jugador
 
         // Recupera el roomCode enviado desde el cliente
         String assignedCanvasId;
         String roomCode = requestBody.get("roomCode");
-        System.out.println(roomCode);
         // Lógica para asignar el roomCode
         if(rooms.get(roomCode) == null){//Primer jugador en conectarse a la sala.
             ArrayList<String> canvasId = prepareCanvasId();

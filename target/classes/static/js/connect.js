@@ -53,12 +53,6 @@ var connect = (function () {
         var socket = new SockJS("/stompendpoint");
         stompClient = Stomp.over(socket);
 
-        //var room = $('#room').val();
-
-        // console.log(model.getCode());
-
-        // randomKey();
-
         stompClient.connect({}, function (frame) {
             console.log('Connected: ' + frame);
             stompClient.subscribe("/game/room." + code, function (eventbody) {
@@ -100,29 +94,23 @@ var connect = (function () {
     var requestCanvasAssignment = function (roomCode) {
         return new Promise((resolve, reject) => {
             // Realiza una solicitud al servidor para obtener la asignación del canvas y el roomCode
-            fetch('/api/assignCanvas', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ roomCode: roomCode }),
-            })
-                .then(response => response.json())
-                .then(data => {
-                    // data.canvasId contiene el ID del canvas asignado por el servidor
+
+            $.ajax({
+                url: "/API-v1.0MagicBrushStrokes/board",
+                type: 'POST',
+                contentType: "application/json",
+                data: JSON.stringify({ roomCode: roomCode }),
+                success: function(data){
                     assignedCanvasId = data.canvasId;
-                    console.log("Canvas asignado: " + assignedCanvasId);
-
-                    // data.roomCode contiene el roomCode asignado por el servidor
                     roomCode = data.roomCode;
-                    console.log("roomCode asignado: " + roomCode);
-
-                    // Resuelve la Promesa con los datos necesarios
                     resolve();
-                })
-                .catch(error => {
+                },
+                error: function(error){
                     reject(error);
-                });
+                }
+
+            });
+
         });
     };
 
@@ -130,7 +118,7 @@ var connect = (function () {
 
         init: function () {
             var urlParams = new URLSearchParams(window.location.search);
-            code = "Test";
+            code = urlParams.get('code');
             console.log("Room code: " + code);
             // Obtén el ID de canvas asignado al usuario desde la cookie o el almacenamiento local
             assignedCanvasId = localStorage.getItem('assignedCanvasId');
@@ -144,18 +132,15 @@ var connect = (function () {
                             canvas = document.getElementById(assignedCanvasId);
                             console.log("Canvas: " + assignedCanvasId);
                             ctx = canvas.getContext("2d");
-                            // if (window.PointerEvent) {
                             canvas.addEventListener("pointerdown", function () {
                                 canvas.addEventListener("pointermove", draw, false);
 
                                 drawingPoint = [];
-                                // endPointer();
                             }, false);
                             canvas.addEventListener("pointerup", function () {
                                 endPointer();
                                 sendCanvasData();
                             });
-                            // }
                             connectAndSubscribe();
                         }
                     });
@@ -163,18 +148,15 @@ var connect = (function () {
                 canvas = document.getElementById(assignedCanvasId);
                 console.log("Canvas: " + assignedCanvasId);
                 ctx = canvas.getContext("2d");
-                // if (window.PointerEvent) {
                 canvas.addEventListener("pointerdown", function () {
                     canvas.addEventListener("pointermove", draw, false);
 
                     drawingPoint = [];
-                    // endPointer();
                 }, false);
                 canvas.addEventListener("pointerup", function () {
                     endPointer();
                     sendCanvasData();
                 });
-                // }
                 connectAndSubscribe();
             }
         },
