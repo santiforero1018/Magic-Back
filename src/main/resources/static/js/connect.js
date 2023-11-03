@@ -25,7 +25,7 @@ var connect = (function () {
         if (room.value === "") {
             var random = Math.random();
             code = Math.ceil(random * 900000).toString().padStart(6, '0');
-        }else{
+        } else {
             code = room.value;
         }
         window.location.href = 'board.html?code=' + code;
@@ -88,12 +88,27 @@ var connect = (function () {
             ctxN.stroke();
         }
 
+        else {
+            var allCanvas = ["canvas1", "canvas2", "canvas3", "canvas4"];
+            var index = allCanvas.indexOf(canvasData.canvasId);
+            allCanvas.splice(index, 1);
+            var erase1 = document.getElementById(allCanvas[0]);
+            var erase2 = document.getElementById(allCanvas[1]);
+            var erase3 = document.getElementById(allCanvas[2]);
+            var cer1 = erase1.getContext("2d");
+            var cer2 = erase2.getContext("2d");
+            var cer3 = erase3.getContext("2d");
+            cer1.clearRect(0, 0, canvas.width, canvas.height);
+            cer2.clearRect(0, 0, canvas.width, canvas.height);
+            cer3.clearRect(0, 0, canvas.width, canvas.height);
+        }
+
     }
 
     var sendCanvasData = function () {
         var canvasData = {
             canvasId: assignedCanvasId,
-            drawingData: drawingPoint
+            drawingData: drawingPoint,
         };
         stompClient.send("/app/room." + code, {}, JSON.stringify(canvasData));
         drawingPoint = [];
@@ -141,12 +156,44 @@ var connect = (function () {
         }
     };
 
+
+    let powerActive = false;
+
+    // Función para activar el "poder"
+    const activatePower = () => {
+
+        if (!powerActive) {
+            // Activa el "poder" y realiza la lógica para borrar los canvas de los demás jugadores
+            powerActive = true;
+            alert("¡Has activado el poder! Los demás canvas se borrarán.");
+
+            // Lógica para borrar los canvas de los demás jugadores
+            // Aquí debes enviar un mensaje a los otros jugadores para que borren sus canvas
+            // Puedes usar WebSockets para esto, similar a como manejas los dibujos.
+            // Agrega la siguiente lógica en tu script JavaScript existente
+
+            // Escucha el mensaje de "borrado" y borra el canvas si se recibe
+            var canvasData = {
+                canvasId: assignedCanvasId,
+                drawingData: drawingPoint,
+                power: true
+            };
+            stompClient.send("/app/room." + code, {}, JSON.stringify(canvasData));
+
+        }
+    };
+
+
+
     return {
 
         init: function () {
+
             var urlParams = new URLSearchParams(window.location.search);
             code = urlParams.get('code');
             console.log("Room code: " + code);
+            // Escucha el clic en el "poder" y llama a la función de activación
+            document.getElementById("powerButton").addEventListener("click", activatePower);
             // Obtén el ID de canvas asignado al usuario desde la cookie o el almacenamiento local
             assignedCanvasId = localStorage.getItem('assignedCanvasId');
             if (!assignedCanvasId) {

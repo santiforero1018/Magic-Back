@@ -52,3 +52,26 @@ body {
 .distribution > .canvas{
     margin-left: 2%;
 }
+
+#powerButton{
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    margin-top: -60px;
+    margin-left: 400px;
+    justify-content: center;
+    display: block;
+    color: #fff;
+    background: #573b8a;
+    font-size: 1em;
+    font-weight: bold;
+    outline: none;
+    border: none;
+    border-radius: 50%;
+    transition: .2s ease-in-out;
+    cursor: pointer;
+}
+
+#powerButton:hover{
+    background: #6d44b8;
+}
