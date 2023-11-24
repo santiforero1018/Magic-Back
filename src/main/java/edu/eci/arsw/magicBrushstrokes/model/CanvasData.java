@@ -4,7 +4,12 @@ public class CanvasData {
     private String canvasId;
     private Point[] drawingData;
     private boolean power;
+    private String typePower;
     public CanvasData(){
+    }
+
+    public CanvasData(String typePower){
+        this.typePower = typePower;
     }
 
     public CanvasData(String canvasId, Point[] drawingData){
@@ -35,5 +40,9 @@ public class CanvasData {
 
     public void setPower(boolean power){
         this.power = power;
+    }
+
+    public String getTypePower(){
+        return this.typePower;
     }
 }

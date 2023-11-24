@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-@CrossOrigin(origins = "http://10.2.67.60:3000") // Cambiar al momento de subir a azure
+@CrossOrigin(origins = "http://192.168.1.11:3000") // Cambiar al momento de subir a azure
 @RestController
 @RequestMapping(value="/API-v1.0MagicBrushStrokes")
 public class CanvasAssignmentController {

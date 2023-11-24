@@ -30,12 +30,13 @@ public class STOMPMessagesHandler {
             msgt.convertAndSend("/game/room." + roomCode,canvasData);
         } else {
             // Si no se ha activado el "poder", simplemente transmite el evento de dibujo
-            System.out.println("enviando mensaje...");
+            
             msgt.convertAndSend("/game/room." + roomCode, canvasData);
         }
     }
 
-    private void clearCanvasForPlayer(String canvasId) {
-        
-    }
+    // @MessageMapping("/room.{roomCode}/power")
+    // public void handlePowerActivation(String message, @DestinationVariable String roomCode) throws Exception {
+    //     msgt.convertAndSend("/game/room." + roomCode + "/power", message);
+    // }
 }

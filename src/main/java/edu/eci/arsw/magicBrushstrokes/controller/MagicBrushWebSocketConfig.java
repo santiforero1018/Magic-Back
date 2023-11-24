@@ -19,7 +19,7 @@ public class MagicBrushWebSocketConfig extends AbstractWebSocketMessageBrokerCon
 
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
-        registry.addEndpoint("/stompendpoint").setAllowedOrigins("http://10.2.67.60:3000").withSockJS(); // Cambiar al momento de subir a azure
+        registry.addEndpoint("/stompendpoint").setAllowedOrigins("http://192.168.1.11:3000").withSockJS(); // Cambiar al momento de subir a azure
         
     }
 }
