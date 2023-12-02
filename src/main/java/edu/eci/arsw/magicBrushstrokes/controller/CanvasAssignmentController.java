@@ -46,6 +46,12 @@ public class CanvasAssignmentController {
         response.put("roomCode", roomCode);
         return new ResponseEntity<HashMap<String,String>>(response, HttpStatus.ACCEPTED);
     }
+
+   
+    @RequestMapping(method = RequestMethod.GET, value= "/welcome")
+    public ResponseEntity<?> getMessage(){
+        return new ResponseEntity<String>("servidor funcionando", HttpStatus.ACCEPTED);
+    }
     
 
     private ArrayList<String> prepareCanvasId() {
