@@ -7,7 +7,7 @@
 	<groupId>edu.eci.pdsw.examples</groupId>
 	<artifactId>Magic-BrushStrokes</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 
 	<name>Magic-BrushStrokes</name>
 	<description>project for Spring Boot</description>
@@ -154,7 +154,7 @@
 
 	<build>
 		<plugins>
-			<plugin>
+			<!-- <plugin>
 				<artifactId>maven-clean-plugin</artifactId>
 				<version>3.1.0</version>
 			  </plugin>
@@ -200,7 +200,7 @@
 				<configuration>
 				  <failOnMissingWebXml>false</failOnMissingWebXml>
 				</configuration>
-			  </plugin>
+			  </plugin> -->
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
