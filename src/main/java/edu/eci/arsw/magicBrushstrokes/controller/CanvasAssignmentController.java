@@ -22,7 +22,7 @@ public class CanvasAssignmentController {
 
     Map<String, ArrayList<String>> rooms = new ConcurrentHashMap<>();
 
-    @RequestMapping(method = RequestMethod.POST, value= "/board")
+    @RequestMapping(method = RequestMethod.GET, value= "/board")
     public ResponseEntity<?> assignCanvas(/*@RequestBody Map<String, String> requestBody*/) {
         // // Lógica para asignar un canvas específico al jugador
 
