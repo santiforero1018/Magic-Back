@@ -50,7 +50,7 @@ public class CanvasAssignmentController {
     }
 
    
-    @RequestMapping(method = RequestMethod.GET, value= "/welcome")
+    @RequestMapping(method = RequestMethod.POST, value= "/welcome")
     public ResponseEntity<?> getMessage(){
         return new ResponseEntity<String>("servidor funcionando", HttpStatus.ACCEPTED);
     }
