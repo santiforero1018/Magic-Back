@@ -8,10 +8,11 @@ import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import edu.eci.arsw.magicBrushstrokes.model.Point;
 import edu.eci.arsw.magicBrushstrokes.model.CanvasData;
-
+@CrossOrigin(origins = "http://magicbrushstrokeswebappfront.azurewebsites.net")
 @Controller
 public class STOMPMessagesHandler {
 
