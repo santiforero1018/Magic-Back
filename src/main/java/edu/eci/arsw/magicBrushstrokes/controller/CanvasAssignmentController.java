@@ -27,6 +27,7 @@ public class CanvasAssignmentController {
         // Lógica para asignar un canvas específico al jugador
 
         // Recupera el roomCode enviado desde el cliente
+        System.out.println("ke chimba, inicie");
         String assignedCanvasId;
         String roomCode = requestBody.get("roomCode");
         // Lógica para asignar el roomCode
