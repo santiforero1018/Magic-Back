@@ -23,29 +23,30 @@ public class CanvasAssignmentController {
     Map<String, ArrayList<String>> rooms = new ConcurrentHashMap<>();
 
     @RequestMapping(method = RequestMethod.POST, value= "/board")
-    public ResponseEntity<?> assignCanvas(@RequestBody Map<String, String> requestBody) {
-        // Lógica para asignar un canvas específico al jugador
+    public ResponseEntity<?> assignCanvas(/*@RequestBody Map<String, String> requestBody*/) {
+        // // Lógica para asignar un canvas específico al jugador
 
-        // Recupera el roomCode enviado desde el cliente
-        System.out.println("ke chimba, inicie");
-        String assignedCanvasId;
-        String roomCode = requestBody.get("roomCode");
-        // Lógica para asignar el roomCode
-        if(rooms.get(roomCode) == null){//Primer jugador en conectarse a la sala.
-            ArrayList<String> canvasId = prepareCanvasId();
-            rooms.putIfAbsent(roomCode, canvasId);
-            assignedCanvasId = "canvas1";
-        }else if(!rooms.get(roomCode).isEmpty()){
-            ArrayList<String> canvasId = rooms.get(roomCode);
-            assignedCanvasId = canvasId.get(0);
-            canvasId.remove(0);
-        }else{
-            assignedCanvasId = "FULLROOM";
-        }
-        HashMap<String, String> response = new HashMap<String, String>();
-        response.put("canvasId", assignedCanvasId);
-        response.put("roomCode", roomCode);
-        return new ResponseEntity<HashMap<String,String>>(response, HttpStatus.ACCEPTED);
+        // // Recupera el roomCode enviado desde el cliente
+        // System.out.println("ke chimba, inicie");
+        // String assignedCanvasId;
+        // String roomCode = requestBody.get("roomCode");
+        // // Lógica para asignar el roomCode
+        // if(rooms.get(roomCode) == null){//Primer jugador en conectarse a la sala.
+        //     ArrayList<String> canvasId = prepareCanvasId();
+        //     rooms.putIfAbsent(roomCode, canvasId);
+        //     assignedCanvasId = "canvas1";
+        // }else if(!rooms.get(roomCode).isEmpty()){
+        //     ArrayList<String> canvasId = rooms.get(roomCode);
+        //     assignedCanvasId = canvasId.get(0);
+        //     canvasId.remove(0);
+        // }else{
+        //     assignedCanvasId = "FULLROOM";
+        // }
+        // HashMap<String, String> response = new HashMap<String, String>();
+        // response.put("canvasId", assignedCanvasId);
+        // response.put("roomCode", roomCode);
+        // return new ResponseEntity<HashMap<String,String>>(response, HttpStatus.ACCEPTED);
+        return new ResponseEntity<String>("re chimba, funca", HttpStatus.ACCEPTED);
     }
 
    
