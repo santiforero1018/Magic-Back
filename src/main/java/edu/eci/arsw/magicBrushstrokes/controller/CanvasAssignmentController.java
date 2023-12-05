@@ -22,8 +22,8 @@ public class CanvasAssignmentController {
 
     Map<String, ArrayList<String>> rooms = new ConcurrentHashMap<>();
 
-    @RequestMapping(method = RequestMethod.GET, value= "/board")
-    public ResponseEntity<?> assignCanvas(/*@RequestBody Map<String, String> requestBody*/) {
+    @RequestMapping(method = RequestMethod.POST, value= "/welcome")
+    public ResponseEntity<?> assignCanvas(@RequestBody Map<String, String> requestBody) {
         // // Lógica para asignar un canvas específico al jugador
 
         // // Recupera el roomCode enviado desde el cliente
@@ -50,10 +50,10 @@ public class CanvasAssignmentController {
     }
 
    
-    @RequestMapping(method = RequestMethod.POST, value= "/welcome")
-    public ResponseEntity<?> getMessage(){
-        return new ResponseEntity<String>("servidor funcionando", HttpStatus.ACCEPTED);
-    }
+    // @RequestMapping(method = RequestMethod.POST, value= "/welcome")
+    // public ResponseEntity<?> getMessage(){
+    //     return new ResponseEntity<String>("servidor funcionando", HttpStatus.ACCEPTED);
+    // }
     
 
     private ArrayList<String> prepareCanvasId() {
