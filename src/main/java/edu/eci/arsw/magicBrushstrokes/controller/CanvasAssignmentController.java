@@ -22,7 +22,7 @@ import org.springframework.web.client.RestTemplate;
 @RequestMapping(value = "/API-v1.0MagicBrushStrokes")
 public class CanvasAssignmentController {
 
-    @Autowired
+    
     private RestTemplate restTemplate;
 
     Map<String, ArrayList<String>> rooms = new ConcurrentHashMap<>();
@@ -83,15 +83,13 @@ public class CanvasAssignmentController {
 
     @PostMapping("/makeApiRequest")
     public ResponseEntity<?> makeApiRequest(@RequestBody Map<String, String> requestBody) {
-        // Lógica para manejar la solicitud al servidor de backend
         return backendRequest(requestBody);
     }
 
     private ResponseEntity<?> backendRequest(Map<String, String> requestBody) {
         String apiUrl = "https://magicbrushback.azurewebsites.net/API-v1.0MagicBrushStrokes/welcome";
 
-        // Puedes llamar directamente al método del controlador o encapsular la lógica
-        // en un servicio si es necesario
+        
         ResponseEntity<String> responseEntity = restTemplate.postForEntity(apiUrl, requestBody, String.class);
         return ResponseEntity.status(responseEntity.getStatusCode()).body(responseEntity.getBody());
     }
