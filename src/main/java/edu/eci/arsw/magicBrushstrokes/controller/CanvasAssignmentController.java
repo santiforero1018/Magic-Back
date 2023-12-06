@@ -22,8 +22,8 @@ import org.springframework.web.client.RestTemplate;
 @RequestMapping(value = "/API-v1.0MagicBrushStrokes")
 public class CanvasAssignmentController {
 
-    
-    private RestTemplate restTemplate;
+    // @Autowired
+    // private RestTemplate restTemplate;
 
     Map<String, ArrayList<String>> rooms = new ConcurrentHashMap<>();
 
@@ -81,18 +81,18 @@ public class CanvasAssignmentController {
         return new ResponseEntity<HashMap<String, String>>(response, HttpStatus.ACCEPTED);
     }
 
-    @PostMapping("/makeApiRequest")
-    public ResponseEntity<?> makeApiRequest(@RequestBody Map<String, String> requestBody) {
-        return backendRequest(requestBody);
-    }
+    // @PostMapping("/makeApiRequest")
+    // public ResponseEntity<?> makeApiRequest(@RequestBody Map<String, String> requestBody) {
+    //     return backendRequest(requestBody);
+    // }
 
-    private ResponseEntity<?> backendRequest(Map<String, String> requestBody) {
-        String apiUrl = "https://magicbrushback.azurewebsites.net/API-v1.0MagicBrushStrokes/welcome";
+    // private ResponseEntity<?> backendRequest(Map<String, String> requestBody) {
+    //     String apiUrl = "https://magicbrushback.azurewebsites.net/API-v1.0MagicBrushStrokes/welcome";
 
         
-        ResponseEntity<String> responseEntity = restTemplate.postForEntity(apiUrl, requestBody, String.class);
-        return ResponseEntity.status(responseEntity.getStatusCode()).body(responseEntity.getBody());
-    }
+    //     ResponseEntity<String> responseEntity = restTemplate.postForEntity(apiUrl, requestBody, String.class);
+    //     return ResponseEntity.status(responseEntity.getStatusCode()).body(responseEntity.getBody());
+    // }
 
     private ArrayList<String> prepareCanvasId() {
         ArrayList<String> canvasId = new ArrayList<>();
