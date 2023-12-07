@@ -57,41 +57,51 @@ public class CanvasAssignmentController {
 
     @RequestMapping(method = RequestMethod.POST, value = "/welcome")
     public ResponseEntity<?> getMessage(@RequestBody Map<String, String> requestBody) {
-        // Lógica para asignar un canvas específico al jugador
+        try {
+            // Lógica para asignar un canvas específico al jugador
 
-        // Recupera el roomCode enviado desde el cliente
-        System.out.println("ke chimba, inicie");
-        String assignedCanvasId;
-        String roomCode = requestBody.get("roomCode");
-        // Lógica para asignar el roomCode
-        if (rooms.get(roomCode) == null) {// Primer jugador en conectarse a la sala.
-            ArrayList<String> canvasId = prepareCanvasId();
-            rooms.putIfAbsent(roomCode, canvasId);
-            assignedCanvasId = "canvas1";
-        } else if (!rooms.get(roomCode).isEmpty()) {
-            ArrayList<String> canvasId = rooms.get(roomCode);
-            assignedCanvasId = canvasId.get(0);
-            canvasId.remove(0);
-        } else {
-            assignedCanvasId = "FULLROOM";
+            // Recupera el roomCode enviado desde el cliente
+            System.out.println("ke chimba, inicie");
+            String assignedCanvasId;
+            String roomCode = requestBody.get("roomCode");
+            // Lógica para asignar el roomCode
+            if (rooms.get(roomCode) == null) {// Primer jugador en conectarse a la sala.
+                ArrayList<String> canvasId = prepareCanvasId();
+                rooms.putIfAbsent(roomCode, canvasId);
+                assignedCanvasId = "canvas1";
+            } else if (!rooms.get(roomCode).isEmpty()) {
+                ArrayList<String> canvasId = rooms.get(roomCode);
+                assignedCanvasId = canvasId.get(0);
+                canvasId.remove(0);
+            } else {
+                assignedCanvasId = "FULLROOM";
+            }
+            HashMap<String, String> response = new HashMap<String, String>();
+            response.put("canvasId", assignedCanvasId);
+            response.put("roomCode", roomCode);
+            return new ResponseEntity<HashMap<String, String>>(response, HttpStatus.ACCEPTED);
+        } catch (Exception e) {
+            // Loguear la excepción para obtener detalles en los registros del servidor
+            e.printStackTrace();
+            return new ResponseEntity<String>("Error interno en el servidooooooor", HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        HashMap<String, String> response = new HashMap<String, String>();
-        response.put("canvasId", assignedCanvasId);
-        response.put("roomCode", roomCode);
-        return new ResponseEntity<HashMap<String, String>>(response, HttpStatus.ACCEPTED);
+
     }
 
     // @PostMapping("/makeApiRequest")
-    // public ResponseEntity<?> makeApiRequest(@RequestBody Map<String, String> requestBody) {
-    //     return backendRequest(requestBody);
+    // public ResponseEntity<?> makeApiRequest(@RequestBody Map<String, String>
+    // requestBody) {
+    // return backendRequest(requestBody);
     // }
 
     // private ResponseEntity<?> backendRequest(Map<String, String> requestBody) {
-    //     String apiUrl = "https://magicbrushback.azurewebsites.net/API-v1.0MagicBrushStrokes/welcome";
+    // String apiUrl =
+    // "https://magicbrushback.azurewebsites.net/API-v1.0MagicBrushStrokes/welcome";
 
-        
-    //     ResponseEntity<String> responseEntity = restTemplate.postForEntity(apiUrl, requestBody, String.class);
-    //     return ResponseEntity.status(responseEntity.getStatusCode()).body(responseEntity.getBody());
+    // ResponseEntity<String> responseEntity = restTemplate.postForEntity(apiUrl,
+    // requestBody, String.class);
+    // return
+    // ResponseEntity.status(responseEntity.getStatusCode()).body(responseEntity.getBody());
     // }
 
     private ArrayList<String> prepareCanvasId() {
