@@ -19,7 +19,7 @@ public class MagicBrushWebSocketConfig implements WebSocketMessageBrokerConfigur
 
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
-        registry.addEndpoint("/stompendpoint").setAllowedOrigins("https://magicbrushstrokeswebappfront.azurewebsites.net", "http://magicbrushstrokeswebappfront.azurewebsites.net").withSockJS(); // Cambiar al momento de subir a azure
+        registry.addEndpoint("/stompendpoint").setAllowedOrigins("https://magicbrushstrokeswebappfront.azurewebsites.net", "http://magicbrushstrokeswebappfront.azurewebsites.net", "http://magicbrushstrokes.eastus.cloudapp.azure.com").withSockJS(); // Cambiar al momento de subir a azure
         
     }
 }
