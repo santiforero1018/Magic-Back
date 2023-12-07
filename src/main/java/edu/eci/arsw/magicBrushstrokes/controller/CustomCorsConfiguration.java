@@ -19,7 +19,7 @@ public class CustomCorsConfiguration {
         // Permite solicitudes desde el origen de tu aplicación en http://192.168.1.11:3000
 
         // Cambiar al momento de subir a azure
-        config.addAllowedOrigin("*");
+        config.addAllowedOrigin("http://magicbrushstrokeswebappfront.azurewebsites.net");
 
         // Configura otras opciones CORS según tus necesidades
         config.addAllowedMethod("GET");
@@ -33,4 +33,6 @@ public class CustomCorsConfiguration {
 
         return new CorsFilter(source);
     }
+
+    
 }
