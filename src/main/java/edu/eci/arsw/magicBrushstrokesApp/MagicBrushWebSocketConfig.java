@@ -1,4 +1,4 @@
-package edu.eci.arsw.magicBrushstrokes.controller;
+package edu.eci.arsw.magicBrushstrokesApp;
 
 
 import org.springframework.context.annotation.Configuration;
