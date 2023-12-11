@@ -1,40 +1,42 @@
-package edu.eci.arsw.magicBrushstrokes.services;
+// package edu.eci.arsw.magicBrushstrokes.services;
 
-import java.util.List;
-import java.util.Optional;
+// import java.util.List;
+// import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
+// import org.springframework.beans.factory.annotation.Autowired;
+// import org.springframework.stereotype.Service;
 
-import edu.eci.arsw.magicBrushstrokes.model.Player;
-import edu.eci.arsw.magicBrushstrokes.repository.PlayerRepository;
+// import edu.eci.arsw.magicBrushstrokes.model.Player;
+// import edu.eci.arsw.magicBrushstrokes.repository.PlayerRepository;
 
-public class UserService {
+// @Service
+// public class UserService {
 
-    @Autowired
-    private PlayerRepository playerRepository;
+//     @Autowired
+//     private PlayerRepository playerRepository;
 
-    public Optional<Player> getUser(String nickName) {
-        return playerRepository.findByNickName(nickName);
-    }
+//     public Optional<Player> getUser(String nickName) {
+//         return playerRepository.findByNickName(nickName);
+//     }
 
-    public void addPlayer(Player player) {
-        playerRepository.save(player);
-    }
+//     public void addPlayer(Player player) {
+//         playerRepository.save(player);
+//     }
 
-    // public void updateUser(User user) {
-    //     Optional<User> usuario = UserRepository.findById(user.getEmail());
-    //     User u = usuario.orElseThrow();
-    //     String role = u.getRole();
-    //     user.setRole(role,roleRepository);
-    //     UserRepository.save(user);
-    // }
+//     // public void updateUser(User user) {
+//     //     Optional<User> usuario = UserRepository.findById(user.getEmail());
+//     //     User u = usuario.orElseThrow();
+//     //     String role = u.getRole();
+//     //     user.setRole(role,roleRepository);
+//     //     UserRepository.save(user);
+//     // }
 
-    public List<Player> getAllPlayers() {
-        return playerRepository.findAll();
-    }
+//     public List<Player> getAllPlayers() {
+//         return playerRepository.findAll();
+//     }
 
-    // public void deleteUser(String id) {
-    //     UserRepository.deleteById(id);
-    // }
+//     // public void deleteUser(String id) {
+//     //     UserRepository.deleteById(id);
+//     // }
     
-}
+// }
