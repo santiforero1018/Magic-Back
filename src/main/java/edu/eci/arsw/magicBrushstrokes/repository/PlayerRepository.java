@@ -10,7 +10,7 @@ import edu.eci.arsw.magicBrushstrokes.model.Player;
 
 @Repository
 public interface PlayerRepository extends JpaRepository<Player,Long>{
-    Optional<Player> findByNickName(String nickName);
+    Player findByName(String Name);
 
 }
 

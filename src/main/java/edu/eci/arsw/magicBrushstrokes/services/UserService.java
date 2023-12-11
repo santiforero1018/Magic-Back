@@ -4,17 +4,19 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import edu.eci.arsw.magicBrushstrokes.model.Player;
 import edu.eci.arsw.magicBrushstrokes.repository.PlayerRepository;
 
+@Service
 public class UserService {
 
     @Autowired
     private PlayerRepository playerRepository;
 
-    public Optional<Player> getUser(String nickName) {
-        return playerRepository.findByNickName(nickName);
+    public Player getUser(String Name) {
+        return playerRepository.findByName(Name);
     }
 
     public void addPlayer(Player player) {

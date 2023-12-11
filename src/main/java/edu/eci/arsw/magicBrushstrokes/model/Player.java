@@ -17,28 +17,27 @@ import lombok.Data;
 @Data
 public class Player {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name="name", nullable = false)
     private String name;
-    @Column(name="nickName", nullable = false)
-    private String nickName;
+    // @Column(name="nick_name", nullable = false)
+    // private String nickName;
     @Column(name="age", nullable = false)
     private int age;
     @Column(name="password", nullable = false)
     private String password;
-    @Column(name="veryPassword", nullable = false)
-    private String veryPassword;
+    // @Column(name="very_password", nullable = false)
+    // private String veryPassword;
 
     public Player(){
 
     }
 
-    public Player(String name, String nickName, int age, String password, String veryPassword){
+    public Player(String name, int age, String password){
         this.name = name;
-        this.nickName = nickName;
         this.age = age;
         this.password = password;
-        this.veryPassword = veryPassword;
+        
     }
 }
