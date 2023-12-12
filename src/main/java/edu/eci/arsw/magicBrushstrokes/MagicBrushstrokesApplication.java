@@ -1,4 +1,4 @@
-package edu.eci.arsw.magicBrushstrokesApp;
+package edu.eci.arsw.magicBrushstrokes;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -14,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import edu.eci.arsw.magicBrushstrokes.model.*;
 
 @SpringBootApplication
-@ComponentScan(basePackages = {"edu.eci.arsw.magicBrushstrokes"})
 public class MagicBrushstrokesApplication {
 
 	
