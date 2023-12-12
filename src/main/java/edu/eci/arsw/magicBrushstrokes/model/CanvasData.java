@@ -26,6 +26,10 @@ public class CanvasData {
         this.drawingData = drawingData;
     }
 
+    public void setCanvasTypePower(String typePower){
+        this.typePower =typePower;
+    }
+
     public Point[] getDrawingData(){
         return drawingData;
     }
