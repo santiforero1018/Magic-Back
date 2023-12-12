@@ -40,4 +40,9 @@ public class STOMPMessagesHandler {
     // public void handlePowerActivation(String message, @DestinationVariable String roomCode) throws Exception {
     //     msgt.convertAndSend("/game/room." + roomCode + "/power", message);
     // }
+
+    @MessageMapping("/room.{roomCode}/timer")
+    public void handleTimerEvent(@DestinationVariable String roomCode, String message){
+        msgt.convertAndSend("/room.{roomCode}/timer", message);
+    }
 }
